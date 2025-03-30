@@ -9,8 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^16.3.1",
-    "solc": "0.8.0",
-    "web3": "^4.0.3"
+    "dotenv": "^16.4.7",
+    "fs": "^0.0.1-security",
+    "solc": "^0.8.0",
+    "web3": "^4.16.0"
   }
 }

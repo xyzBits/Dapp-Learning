@@ -35,7 +35,9 @@ const bytecode = contractFile.evm.bytecode.object;
 const abi = contractFile.abi;
 
 // Create web3 with sepolia provider，you can change sepolia to other testnet
-const web3 = new Web3('https://sepolia.infura.io/v3/' + process.env.INFURA_ID);
+// const web3 = new Web3('https://sepolia.infura.io/v3/' + process.env.INFURA_ID);
+const web3 = new Web3('https://eth-sepolia.g.alchemy.com/v2/' + process.env.INFURA_ID);
+
 
 // Create account from privatekey
 const accounts = web3.eth.accounts.wallet.add(privatekey);
