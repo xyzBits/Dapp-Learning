@@ -26,4 +26,5 @@ const contractOfIncrementer =
   tempFile.contracts['Incrementer.sol']['Incrementer'];
 
 // 导出合约数据，可以使用 console 打印 contractFile 中的具体内容信息
+// 为 其他的js文件能够使用这个合约对象，需要对合约对象进行导出
 module.exports = contractOfIncrementer;
