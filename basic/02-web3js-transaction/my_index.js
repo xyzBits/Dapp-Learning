@@ -47,7 +47,7 @@ const Trans = async () => {
     // 交易签名，使用私鉏对交易进行签名
     const createTransaction = await web3.eth.accounts.signTransaction(
         {
-            data: deployTx.encodeABI(), 
+            data: deployTx.encodeABI(), //
             gas: 8_000_000, 
         }, 
         account_from.privateKey,
@@ -155,7 +155,62 @@ const Trans = async () => {
         console.error('Error: ', error);
     });
 
+    for (let step = 0; step < 3; step++) {
+        incrementTransaction = await web3.eth.accounts.signTransaction(
+            {
+                to: contractAddress, 
+                data: incrementTx.encodeABI(), 
+                gas: 8_000_000,
+            }, 
+            account_from.privateKey,
+        );
+
+        await web3.eth.sendSignedTransaction(incrementTransaction.rawTransaction);
+
+        console.log('Waiting for events');
+        await sleep(3000);
+
+        if (step == 3) {
+            web3Socket.eth.clearSubscriptions();
+            console.log('Clearing all the events listeners !!!!');
+        }
+    }
+
+
+
+    console.log();
+    console.log('============================6. Going to get past events');
+
+    const paseEvents = await incrementer.getPastEvents('Increment', {
+        fromBlock: 8013302,
+        toBlock: 'latest',
+    });
+
+    paseEvents.map((event) => {
+        console.log('event: ', event);
+    });
+
+
+
+    console.log();
+    console.log('=======================7. Check the transaction error');
+    incrementTx = incrementer.methods.increment(0);
+    incrementTransaction = await web3.eth.accounts.signTransaction(
+        {
+            to: contractAddress, 
+            data: incrementTx.encodeABI(),
+            gas: 8_000_000,
+        }, 
+        account_from.privateKey,
+    );
+
+    await web3.eth
+    .sendSignedTransaction(incrementTransaction.rawTransaction)
+    .on('error', console.error);
+
 };
+
+
 
 Trans()
 .then(() => process.exit(0))
