@@ -1,4 +1,7 @@
-const SimpleToken = artifacts.require('SimpleToken')
+const SimpleToken = artifacts.require('SimpleToken');
+
+const target = '9b4319d4bdd2731a1ffeb0326c6df1df9ba7ee7ec045786be77020cae6ffbfa0';
+
 
 contract('SimpleToken', (accounts) => {
   it(`Should put 100000 to the ${accounts[0]} `, async () => {

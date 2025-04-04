@@ -34,7 +34,7 @@ module.exports = {
       provider: () =>
       new HDWalletProvider(
         process.env.PRIVATE_KEY,
-        'https://sepolia.infura.io/v3/' + process.env.INFURA_ID
+        'https://eth-sepolia.g.alchemy.com/v2/' + process.env.INFURA_ID
       ),
       network_id: '*',
       gas: 30000000,
